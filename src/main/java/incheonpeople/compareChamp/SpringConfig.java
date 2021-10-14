@@ -1,10 +1,9 @@
 package incheonpeople.compareChamp;
 
-import incheonpeople.compareChamp.repository.ChampRepository;
-import incheonpeople.compareChamp.repository.JpaChampRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import incheonpeople.compareChamp.repository.*;
 import incheonpeople.compareChamp.service.ChampService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,11 +22,16 @@ public class SpringConfig {
 
     @Bean
     public ChampService champService() {
-        return new ChampService(memoryRepository());
+        return new ChampService(champRepository());
     }
 
     @Bean
-    public ChampRepository memoryRepository() {
+    public ChampRepository champRepository() {
         return new JpaChampRepository(em);
+    }
+
+    @Bean
+    public JPAQueryFactory jpaQueryFactory() {
+        return new JPAQueryFactory(em);
     }
 }

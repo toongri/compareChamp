@@ -1,24 +1,32 @@
 package incheonpeople.compareChamp.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "info_champion")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Champ {
     @Id
     @Column(name = "CHAMPIONID")
-    private Long id;
+    private int championId;//championId
     @Column(name = "CHAMPION_NAME_KR")
     private String nameOfChamp;
 
-    public void setId(Long id) {
-        this.id = id;
+    public Champ(int championId, String nameOfChamp) {
+        this.championId = championId;
+        this.nameOfChamp = nameOfChamp;
     }
-    public Long getId() {
-        return id;
+
+    public void setchampionId(int championId) {
+        this.championId = championId;
+    }
+    public int getchampionId() {
+        return championId;
     }
 
     public String getNameOfChamp() {
