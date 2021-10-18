@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <title>LOL</title>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <script type="text/javascript" th:inline="javascript">
+        var userDetail = function(seq) {
+            alert(seq);
+            //window.open("/user/defatil/"+ seq);
+            $.ajax({
+                url : '/tochamp',
+                data : {'champ': seq },
+                dataType : 'json',
+                success : function(result) {
+                    console.log(result);
+                },
+                error : function(err) {
+                    console.log(err);
+                }
+            }); //ajax End
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="opgg">
+        <div class="opgg__logo">
+            <a href="/opgg/top">
+                <img id="opgglogoimg" alt="opgg logo"  src="https://opgg-static.akamaized.net/images/gnb/svg/00-opgglogo.svg"></a>
+        </div>
+        
+        <ul class="opgg__menu">
+            <li><a href="">챔피언분석</a></li>
+            <li><a href="">챔피언승률</a></li>
+            <li><a href="">칼바람</a></li>
+            <li><a href="">우르프</a></li>
+            <li><a href="">대회</a></li>
+            <li><a href="">등등</a></li>
+        </ul>
+
+        <div class="opgg__links">
+
+        </div>
+
+    </nav>
+
+
+    <div class="line">
+        <li><a href="/opgg/top">탑</a></li>
+        <li><a href="/opgg/mid">미드</a></li>
+        <li><a href="/opgg/jungle">정글</a></li>
+        <li><a href="/opgg/bot">봇</a></li>
+        <li><a href="/opgg/sup">서폿</a></li>
+    </div>
+
+    <main>
+    <div class="champs">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>승률</th>
+                    <th>픽률</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="game : ${games}">
+                    <form th:action="@{/opgg/tochamp}" th:method = "post">
+                        <input th:type = "hidden" id="firstChampNumber" name = "firstChampNumber" th:value = "${game.champNumber}">
+                        <input th:type = "hidden" id="secondChampNumber" name = "secondChampNumber" value = "-1">
+                        <input th:type = "hidden" id="lane" name = "lane" value = "Bot">
+                        <input th:type = "hidden" id="vicRate" name = "vicRate" value = "-1">
+                        <td><input type="submit"></td>
+                        <td th:text="${game.champName}"></td>
+                        <td th:text="${#numbers.formatDecimal(game.victoryRate*100, 2, 2)}+' %'"></td>
+                        <td th:text="${#numbers.formatDecimal(game.pickRate*100, 2, 2)}+' %'"></td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

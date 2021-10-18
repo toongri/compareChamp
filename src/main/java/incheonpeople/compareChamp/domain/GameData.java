@@ -15,8 +15,6 @@ public class GameData {
 
     private int duration;
     private double version;
-    @Column(name = "CHAMPIONID")
-    private int championId;
 
 
     @ManyToOne(targetEntity = Champ.class, fetch = FetchType.LAZY)
@@ -64,11 +62,10 @@ public class GameData {
     private int G29;
     private int G30;
 
-    public GameData(GameDataId gameDataId, int duration, double version, int championId, Champ champ, String lane, String side, String win, int damageDealt, int damageTaken, int gold, int kills, int deaths, int assists, int g5, int g6, int g7, int g8, int g9, int g10, int g11, int g12, int g13, int g14, int g15, int g16, int g17, int g18, int g19, int g20, int g21, int g22, int g23, int g24, int g25, int g26, int g27, int g28, int g29, int g30) {
+    public GameData(GameDataId gameDataId, int duration, double version, Champ champ, String lane, String side, String win, int damageDealt, int damageTaken, int gold, int kills, int deaths, int assists, int g5, int g6, int g7, int g8, int g9, int g10, int g11, int g12, int g13, int g14, int g15, int g16, int g17, int g18, int g19, int g20, int g21, int g22, int g23, int g24, int g25, int g26, int g27, int g28, int g29, int g30) {
         this.gameDataId = gameDataId;
         this.duration = duration;
         this.version = version;
-        this.championId = championId;
         this.lane = lane;
         this.side = side;
         this.win = win;
@@ -129,14 +126,6 @@ public class GameData {
 
     public void setVersion(double version) {
         this.version = version;
-    }
-
-    public int getChampionId() {
-        return championId;
-    }
-
-    public void setChampionId(int championId) {
-        this.championId = championId;
     }
 
     public String getLane() {
