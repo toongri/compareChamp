@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 @Configuration
 public class SpringConfig {
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
 
     @Autowired

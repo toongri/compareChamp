@@ -23,7 +23,7 @@ import static incheonpeople.compareChamp.domain.QGameData.gameData;
 
 @RequiredArgsConstructor    // 의존성 주입
 public class GameRepositoryImpl implements GameRepositoryCustom {
-    @PersistenceContext
+    @Autowired
     private EntityManager em;
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
